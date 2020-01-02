@@ -32,5 +32,12 @@ char *getData(char *filename)
 **/
 void interpreter(char *data)
 {
-	printf("%s", data);
+	char *token = NULL;
+
+	token = strtok(data, "\n");
+	while (token != NULL)
+	{
+		printf("%s\n", token);
+		token = strtok(NULL, "\n");
+	}
 }
