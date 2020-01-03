@@ -24,6 +24,32 @@ char *getData(char *filename)
 	return (data);
 }
 /**
+* tokenLength - count the numbers of char in a token using \n and " " delimiters
+* @token: data to count
+* Return: Numbers of char in a subtoken after delim.
+**/
+int tokenLength(char *token)
+{
+	char *subtoken = NULL, *saveptr = NULL, *newtoken = NULL;
+	int i = 0;
+
+	if (token == NULL)
+		return (0);
+	newtoken = strcpy(newtoken, token);
+	token = strtok(newtoken, "\n");
+	while (token != NULL)
+	{
+		subtoken = strtok_r(token, " ", &saveptr);
+		while (subtoken != NULL)
+		{
+			i += strlen(subtoken);
+			subtoken = strtok_r(NULL, " ", &saveptr);
+		}
+		token = strtok(NULL, "\n");
+	}
+	return (i);
+}
+/**
 * interpreter - runs the bytecodes line by line and stop if :
 * - it executed properly every line of the file
 * - it finds an error in the file
@@ -32,15 +58,26 @@ char *getData(char *filename)
 **/
 void interpreter(char *data)
 {
-	char *token = NULL;
-	char *subtoken = NULL;
-	char *saveptr = NULL;
+	char *token = NULL, *subtoken = NULL, *saveptr = NULL, **args = NULL;
+	int tokenLen = 0, i = 0;
 
 	token = strtok(data, "\n");
 	while (token != NULL)
 	{
-		subtoken = strtok_r(
-		printf("%s\n", token);
+		i = 0;
+		tokenLen = tokenLength(token);
+		printf("Token SIZE IS %d\n", tokenLen);
+		args = malloc(sizeof(char) * tokenLen);
+		subtoken = strtok_r(token, " ", &saveptr);
+		while (subtoken != NULL)
+		{
+			args[i] = strdup(subtoken); 
+			i++;
+			subtoken = strtok_r(NULL, " ", &saveptr);
+		}
+		printf("arg[0] is: %s\n", args[0]);
+		printf("arg[1] is: %s\n", args[1]);
+		free(args);
 		token = strtok(NULL, "\n");
 	}
 }
