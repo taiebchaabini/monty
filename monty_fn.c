@@ -30,22 +30,21 @@ char *getData(char *filename)
 **/
 int tokenLength(char *token)
 {
-	char *subtoken = NULL, *saveptr = NULL, *newtoken = NULL;
+	char *subtoken = NULL, *saveptr = NULL, *tmp = NULL, *str = NULL;
 	int i = 0;
 
-	if (token == NULL)
-		return (0);
-	newtoken = strcpy(newtoken, token);
-	token = strtok(newtoken, "\n");
-	while (token != NULL)
+	tmp = malloc(sizeof(char) * strlen(token));
+	tmp = strdup(tmp); 
+	str = strtok(tmp, "\n");
+	while (str != NULL)
 	{
-		subtoken = strtok_r(token, " ", &saveptr);
+		subtoken = strtok_r(str, " ", &saveptr);
 		while (subtoken != NULL)
 		{
 			i += strlen(subtoken);
 			subtoken = strtok_r(NULL, " ", &saveptr);
 		}
-		token = strtok(NULL, "\n");
+		str = strtok(NULL, "\n");
 	}
 	return (i);
 }
@@ -58,7 +57,7 @@ int tokenLength(char *token)
 **/
 void interpreter(char *data)
 {
-	char *token = NULL, *subtoken = NULL, *saveptr = NULL, **args = NULL;
+	char *token = NULL, *subtoken = NULL, *saveptr = NULL;
 	int tokenLen = 0, i = 0;
 
 	token = strtok(data, "\n");
@@ -67,17 +66,13 @@ void interpreter(char *data)
 		i = 0;
 		tokenLen = tokenLength(token);
 		printf("Token SIZE IS %d\n", tokenLen);
-		args = malloc(sizeof(char) * tokenLen);
 		subtoken = strtok_r(token, " ", &saveptr);
 		while (subtoken != NULL)
 		{
-			args[i] = strdup(subtoken); 
+			printf("Subtoken is %s\n", subtoken);
 			i++;
 			subtoken = strtok_r(NULL, " ", &saveptr);
 		}
-		printf("arg[0] is: %s\n", args[0]);
-		printf("arg[1] is: %s\n", args[1]);
-		free(args);
 		token = strtok(NULL, "\n");
 	}
 }
