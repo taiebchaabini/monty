@@ -52,14 +52,14 @@ char *getData(char *filename)
  **/
 int tokenLength(char *token)
 {
-	char *saveptr = NULL; char *tmp = NULL;
+	char *saveptr, *tmp = NULL, *subtoken = NULL;
 	int i = 0;
 
-	token = strtok_r(token, " ", &saveptr);
+	token = strtok_r(token, " \n", &saveptr);
 	while (token != NULL)
 	{
 		i += strlen(token);
-		token = strtok_r(NULL, " ", &saveptr);
+		token = strtok_r(NULL, " \n", &saveptr);
 	}
 	return (i);
 }
@@ -73,23 +73,31 @@ int tokenLength(char *token)
 void interpreter(char *data)
 {
 	char *token = NULL, *subtoken = NULL, *saveptr = NULL, *tmp = NULL;
-	int tokenLen = 0, i = 0;
+	int line = 1, i = 0;
+	char *args[2];
 
 	token = strtok(data, "\n");
 	while (token != NULL)
 	{
 		i = 0;
-		tmp = malloc(sizeof(char) * strlen(token));
-		tmp = strcpy(tmp, token);
-		tokenLen = tokenLength(tmp);
-		printf("[TOKEN][%d] IS %s\n", tokenLen, token);
-	/*	subtoken = strtok_r(token, " \n", &saveptr);
+		subtoken = strtok_r(token, " \n", &saveptr);
 		while (subtoken != NULL)
 		{
-			printf("--------> SUB TOKEN IS : %s\n", subtoken);
+			args[i] = subtoken; 
 			i++;
+			if (strcmp(args[0], "push") == 0)
+			;
+			else
+			{
+				args[1] = NULL;
+				break;
+			}
 			subtoken = strtok_r(NULL, " \n", &saveptr);
 		}
-	*/	token = strtok(NULL, "\n");
+		/** MY EXECUTION COMES HERE **/
+
+		line++;
+		token = strtok(NULL, "\n");
 	}
+	printf("Lines %d\n", line -1);
 }
