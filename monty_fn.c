@@ -46,24 +46,6 @@ char *getData(char *filename)
 	return (data);
 }
 /**
- * tokenLength - count the numbers of char in a token using \n and " " delimiters
- * @token: data to count
- * Return: Numbers of char in a subtoken after delim.
- **/
-int tokenLength(char *token)
-{
-	char *saveptr, *tmp = NULL, *subtoken = NULL;
-	int i = 0;
-
-	token = strtok_r(token, " \n", &saveptr);
-	while (token != NULL)
-	{
-		i += strlen(token);
-		token = strtok_r(NULL, " \n", &saveptr);
-	}
-	return (i);
-}
-/**
  * interpreter - runs the bytecodes line by line and stop if :
  * - it executed properly every line of the file
  * - it finds an error in the file
