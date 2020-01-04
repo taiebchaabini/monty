@@ -1,31 +1,11 @@
 #include "monty.h"
-void _push(void)
-{
-	printf("PUSH EXECUTED\n");
-}
-void _pull(void)
-{
-	printf("PULL EXECUTED\n");
-}
 /**
 *
 **/
 void instruction(char *opcode, char *arg, unsigned int line_number)
 {
-	int i = 0;
-	instruction_t opcodes[] = {
-		{"push", _push},
-		{"pull", _pull},
-		{NULL, NULL}
-	};
-	while (opcodes[i].opcode)
-	{
-		if (strcmp(opcodes[i].opcode, opcode) == 0)
-		{
-			printf("OPCODE found");
-			break;
-		}
-	}
+	if (strcmp(opcode, "push") != 0)
+		exit(-1)
 	printf("L%d:OPCODE IS %s, value %s\n", line_number, opcode, arg);
 
 }
