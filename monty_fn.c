@@ -13,6 +13,8 @@ int checkInt(char *arg, unsigned int linen)
 
 	while (arg[i] != '\0')
 	{
+		if (i == 0 && arg[i] == '-')
+			i++;
 		if (arg[i] >= 48 && arg[i] <= 57)
 			i++;
 		else
