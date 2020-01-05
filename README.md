@@ -8,8 +8,9 @@ Usage: `./monty file`
 - What are the most common use cases of stacks and queues
 - What is the proper way to use global variables
 - How to work with git submodules
+# IMPLEMENTED:
+- push and pall opcodes. 
 # TODO:
-- Implement the push and pall opcodes. 
 - Implement the pint opcode.
 - Implement the pop opcode.
 - Implement the swap opcode.
