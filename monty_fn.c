@@ -30,10 +30,8 @@ int checkInt(char *arg, unsigned int linen)
 * @stack: stack_t pointer to pointer
 * @line_number: current <instruction> line_number
 **/
-void _push(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
-	stack_t *head = NULL, *new = NULL;
-
 	add_dnodeint(stack, argn);
 }
 /**
@@ -42,7 +40,7 @@ void _push(stack_t **stack, unsigned int line_number)
 * @stack: stack_t pointer to pointer
 * @line_number: current <instruction> line_number
 **/
-void _pall(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	while (*stack)
 	{
