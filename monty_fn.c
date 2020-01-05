@@ -23,23 +23,29 @@ int checkInt(char *arg, unsigned int linen)
 	val = atoi(arg);
 	return (val);
 }
-
 /**
 * _push - pushes an element to the stack.
 * Usage: push <int>
 **/
 void _push(stack_t **stack, unsigned int line_number)
 {
-	printf("L%d:PUSH EXECUTED and value is %d\n", line_number, argn);
+	stack_t *head = NULL, *new = NULL;
+	
+	add_dnodeint(stack, argn);
+	return;
 }
 void _pall(stack_t **stack, unsigned int line_number)
 {
-	printf("L%d:PALL EXECUTED\n", line_number);
+	while (*stack)
+	{
+		printf("%d\n", (*stack)->n);
+		*stack = (*stack)->next;
+	}
 }
 /**
 * getOpcodeFn - checks if opcode exist and return it function.
 **/
-void (*getOpcode(char *opcode, char *arg, unsigned int line_number))(stack_t **stack, unsigned int line_number)
+void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack, unsigned int line_number)
 {
 	int i = 0;
 
@@ -53,21 +59,13 @@ void (*getOpcode(char *opcode, char *arg, unsigned int line_number))(stack_t **s
 		if (strcmp(opcodes[i].opcode, opcode) == 0)
 		{
 			if (strcmp(opcode, "push") == 0)
-				argn = checkInt(arg, line_number);
+				argn = checkInt(arg, linen);
 			return opcodes[i].f;
 		}
 		i++;
 	}
-	printf("L%d: unknown instruction %s\n", line_number, opcode);
+	printf("L%d: unknown instruction %s\n", linen, opcode);
 	exit(EXIT_FAILURE);
-}
-/**
-*
-**/
-void instruction(char *opcode, char *arg, unsigned int line_number)
-{
-	stack_t **stack;
-	getOpcode(opcode, arg, line_number)(stack, line_number);
 }
 /**
  * interpreter - runs the bytecodes line by line and stop if :
@@ -83,6 +81,7 @@ void interpreter(char *filename)
 	ssize_t read;
 	char *data = NULL, *opcode = NULL, *arg = NULL;
 	int linen = 1;
+	stack_t *stack = NULL;
 
 	fp = fopen(filename, "r");
 	if (fp == NULL)
@@ -95,7 +94,7 @@ void interpreter(char *filename)
 		opcode = strtok(data, " \n");
 		arg = strtok(NULL, " \n");
 		/** MY INSTRUCTIOn COMES HERE **/
-		instruction(opcode, arg, linen);
+		(*instruction(opcode, arg, linen))(&stack, linen);
 		/** COUNT LINES **/
 		linen++;
 	}

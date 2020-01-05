@@ -1,9 +1,4 @@
-push1 0
-push2 1
-push3 2
-push4 3
-pall5 6   
-push6 4
-push7 5    
-push8 6        
-pall9
+push 1
+push 2
+push 3
+pall

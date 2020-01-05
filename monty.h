@@ -8,8 +8,6 @@
 #include <unistd.h>
 #include <string.h>
 extern int argn;
-void interpreter(char *data);
-void instruction(char *opcode, char *arg, unsigned int line_number);
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -38,4 +36,6 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+void interpreter(char *data);
+void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack, unsigned int line_number);
 #endif
