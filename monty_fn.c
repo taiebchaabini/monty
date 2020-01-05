@@ -26,6 +26,8 @@ int checkInt(char *arg, unsigned int linen)
 /**
 * _push - pushes an element to the stack.
 * Usage: push <int>
+* @stack: stack_t pointer to pointer
+* @line_number: current <instruction> line_number
 **/
 void _push(stack_t **stack, unsigned int line_number)
 {
@@ -34,6 +36,12 @@ void _push(stack_t **stack, unsigned int line_number)
 	add_dnodeint(stack, argn);
 	return;
 }
+/**
+* _pall - prints all the values on the stack, starting from
+* the top of the stack.
+* @stack: stack_t pointer to pointer
+* @line_number: current <instruction> line_number
+**/
 void _pall(stack_t **stack, unsigned int line_number)
 {
 	while (*stack)
@@ -43,7 +51,10 @@ void _pall(stack_t **stack, unsigned int line_number)
 	}
 }
 /**
-* getOpcodeFn - checks if opcode exist and return it function.
+* instruction - checks if opcode exist and execute it function.
+* @opcode: opcode of function to execute 
+* @arg: argument to pass to this function
+* @linen: line number of instruction
 **/
 void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack, unsigned int line_number)
 {
@@ -72,7 +83,7 @@ void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack
  * - it executed properly every line of the file
  * - it finds an error in the file
  * - an error occured
- * @data: bytecodes data
+ * @filename: file to read
  **/
 void interpreter(char *filename)
 {
@@ -99,6 +110,7 @@ void interpreter(char *filename)
 		linen++;
 	}
 	free(data);
+	free_stack_t(stack);
 	fclose(fp);
 	exit(0);
 }
