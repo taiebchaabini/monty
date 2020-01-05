@@ -3,8 +3,8 @@ int argn;
 /**
 * checkInt - Checks if each value of given string is an int and transform it
 * values to integers
-* @arg - String to transform to int
-* @linen - Current <instruction> line number
+* @arg: String to transform to int
+* @linen: Current <instruction> line number
 * Return: given string to integer.
 **/
 int checkInt(char *arg, unsigned int linen)
@@ -55,6 +55,7 @@ void _pall(stack_t **stack, unsigned int line_number)
 * @opcode: opcode of function to execute
 * @arg: argument to pass to this function
 * @linen: line number of instruction
+* Return: pointer to function
 **/
 void (*instruction(char *opcode, char *arg, unsigned int linen))
 (stack_t **stack, unsigned int line_number)
