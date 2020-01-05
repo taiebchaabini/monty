@@ -39,7 +39,7 @@ typedef struct instruction_s
 int checkInt(char *arg, unsigned int linen);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
-
+stack_t *add_dnodeint(stack_t **head, const int n);
 void free_stack_t(stack_t *head);
 void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack, unsigned int line_number);
 void interpreter(char *filename);

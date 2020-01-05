@@ -1,7 +1,8 @@
 #include "monty.h"
 int argn;
 /**
-* checkInt - Checks if each value of given string is an int and transform it values to integers
+* checkInt - Checks if each value of given string is an int and transform it
+* values to integers
 * @arg - String to transform to int
 * @linen - Current <instruction> line number
 * Return: given string to integer.
@@ -32,9 +33,8 @@ int checkInt(char *arg, unsigned int linen)
 void _push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = NULL, *new = NULL;
-	
+
 	add_dnodeint(stack, argn);
-	return;
 }
 /**
 * _pall - prints all the values on the stack, starting from
@@ -52,11 +52,12 @@ void _pall(stack_t **stack, unsigned int line_number)
 }
 /**
 * instruction - checks if opcode exist and execute it function.
-* @opcode: opcode of function to execute 
+* @opcode: opcode of function to execute
 * @arg: argument to pass to this function
 * @linen: line number of instruction
 **/
-void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack, unsigned int line_number)
+void (*instruction(char *opcode, char *arg, unsigned int linen))
+(stack_t **stack, unsigned int line_number)
 {
 	int i = 0;
 
@@ -71,7 +72,7 @@ void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack
 		{
 			if (strcmp(opcode, "push") == 0)
 				argn = checkInt(arg, linen);
-			return opcodes[i].f;
+			return (opcodes[i].f);
 		}
 		i++;
 	}
