@@ -17,7 +17,7 @@ int checkInt(char *arg, unsigned int linen)
 			i++;
 		else
 		{
-			printf("L%d: usage: push integer\n", linen);
+			fprintf(stderr, "L%d: usage: push integer\n", linen);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -75,7 +75,7 @@ void (*instruction(char *opcode, char *arg, unsigned int linen))
 		}
 		i++;
 	}
-	printf("L%d: unknown instruction %s\n", linen, opcode);
+	fprintf(stderr, "L%d: unknown instruction %s\n", linen, opcode);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -97,7 +97,7 @@ void interpreter(char *filename)
 	fp = fopen(filename, "r");
 	if (fp == NULL)
 	{
-		printf("Error: Can't open file %s\n", filename);
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 	while ((read = getline(&data, &len, fp)) != -1)
