@@ -7,12 +7,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-char *getData(char *filename);
+extern int argn;
 void interpreter(char *data);
-/**
-*
-**/
-
+void instruction(char *opcode, char *arg, unsigned int line_number);
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
