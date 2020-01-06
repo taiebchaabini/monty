@@ -105,9 +105,12 @@ void interpreter(char *filename)
 	while ((read = getline(&data, &len, fp)) != -1)
 	{
 		opcode = strtok(data, " \n");
+		if (opcode != NULL)
+		{
 		arg = strtok(NULL, " \n");
 		/** MY INSTRUCTIOn COMES HERE **/
 		(*instruction(opcode, arg, linen))(&stack, linen);
+		}
 		/** COUNT LINES **/
 		linen++;
 	}
