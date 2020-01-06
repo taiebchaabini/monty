@@ -1,8 +1,8 @@
 #include "monty.h"
 /**
 * main - The monty program interpreter for monty byte code files
-* ac: number of arguments
-* av: arguments passed to the program
+* @ac: number of arguments
+* @av: arguments passed to the program
 * Return: 0 otherwise EXIT_FAILURE
 **/
 int main(int ac, char **av)
