@@ -13,11 +13,13 @@ int checkInt(char *arg, unsigned int linen)
 
 	while (arg[i] != '\0')
 	{
+		if (i == 0 && arg[i] == '-')
+			i++;
 		if (arg[i] >= 48 && arg[i] <= 57)
 			i++;
 		else
 		{
-			printf("L%d: usage: push integer\n", linen);
+			fprintf(stderr, "L%d: usage: push integer\n", linen);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -75,7 +77,7 @@ void (*instruction(char *opcode, char *arg, unsigned int linen))
 		}
 		i++;
 	}
-	printf("L%d: unknown instruction %s\n", linen, opcode);
+	fprintf(stderr, "L%d: unknown instruction %s\n", linen, opcode);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -97,20 +99,22 @@ void interpreter(char *filename)
 	fp = fopen(filename, "r");
 	if (fp == NULL)
 	{
-		printf("Error: Can't open file %s\n", filename);
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 	while ((read = getline(&data, &len, fp)) != -1)
 	{
 		opcode = strtok(data, " \n");
+		if (opcode != NULL)
+		{
 		arg = strtok(NULL, " \n");
 		/** MY INSTRUCTIOn COMES HERE **/
 		(*instruction(opcode, arg, linen))(&stack, linen);
+		}
 		/** COUNT LINES **/
 		linen++;
 	}
 	free(data);
-	free_stack_t(stack);
 	fclose(fp);
 	exit(0);
 }

@@ -19,9 +19,9 @@ extern int argn;
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 /**
  * struct instruction_s - opcode and its function
@@ -33,14 +33,18 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 int checkInt(char *arg, unsigned int linen);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 stack_t *add_dnodeint(stack_t **head, const int n);
 void free_stack_t(stack_t *head);
-void (*instruction(char *opcode, char *arg, unsigned int linen))(stack_t **stack, unsigned int line_number);
+/**
+* instruction - is a function
+**/
+void (*instruction(char *opcode, char *arg, unsigned int linen))
+(stack_t **stack, unsigned int line_number);
 void interpreter(char *filename);
 #endif
