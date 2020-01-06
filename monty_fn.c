@@ -115,7 +115,6 @@ void interpreter(char *filename)
 		linen++;
 	}
 	free(data);
-	free_stack_t(stack);
 	fclose(fp);
 	exit(0);
 }
