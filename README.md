@@ -20,7 +20,7 @@ Usage: `./monty file`
 - Implement the div opcode.
 - Implement the mul opcode.
 - Implement the mod opcode.
-- Implement comments
+- Implement comments.
 - Implement the pchar opcode.
 - Implement the pstr opcode.
 - Implement the rotl opcode.
